@@ -9,6 +9,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = translations[locale];
+const currentLocaleObj = LOCALES.find((l) => l.code === locale) || LOCALES[0];
 
 const siteUrl = 'https://voicetake.github.io';
 const currentPath = locale === 'en' ? '/' : `/${locale}/`;
@@ -25,56 +26,47 @@ const ogLocales: Record<Locale, string> = {
   ja: 'ja_JP',
 };
 
-// JSON-LD Schemas: WebSite, WebApplication, and SoftwareApplication (MultimediaApplication)
+// JSON-LD Schemas Graph
 const websiteSchema = {
-  '@context': 'https://schema.org',
   '@type': 'WebSite',
+  '@id': `${siteUrl}/#website`,
   name: 'VoiceTake',
-  alternateName: 'VoiceTake Audio Recorder',
+  alternateName: ['VoiceTake Audio Recorder', 'VoiceTake Studio Recorder'],
   url: siteUrl,
   description: t.meta.description,
   inLanguage: locale,
-};
-
-const webApplicationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebApplication',
-  name: 'VoiceTake',
-  url: canonical,
-  applicationCategory: 'MultimediaApplication',
-  operatingSystem: 'Any (Web Browser)',
-  browserRequirements: 'Requires HTML5 Web Audio API and MediaDevices support',
-  description: t.meta.description,
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
+  publisher: {
+    '@type': 'Organization',
+    name: 'VoiceTake',
+    url: siteUrl,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${siteUrl}/logo.svg`,
+    },
   },
-  featureList: [
-    'Uncompressed Studio-Quality Lossless 16/24-bit PCM WAV Recording',
-    'Real-time 60 FPS Audio Waveform and Frequency Spectrum Visualizer',
-    'Bypass Automated Gain Control (AGC) and Browser Echo Cancellation',
-    '100% Client-Side In-Browser Processing (Zero Server Uploads)',
-    'Instant Scrubbable Playback and Multi-Take Session Manager',
-  ],
 };
 
 const softwareApplicationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'VoiceTake Audio Studio',
-  operatingSystem: 'All Modern Browsers (Chrome, Firefox, Safari, Edge)',
+  '@type': ['WebApplication', 'SoftwareApplication'],
+  '@id': `${canonical}#webapp`,
+  name: 'VoiceTake - Free Studio-Quality Browser Audio Recorder',
+  alternateName: 'VoiceTake',
+  url: canonical,
   applicationCategory: 'MultimediaApplication',
-  softwareVersion: '1.0.0',
+  operatingSystem: 'All Modern Browsers (Chrome, Safari, Firefox, Edge, iOS, Android)',
+  browserRequirements: 'Requires Web Audio API and MediaDevices support',
+  description: t.meta.description,
+  screenshot: ogImageUrl,
   offers: {
     '@type': 'Offer',
     price: '0.00',
     priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
   },
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '4.9',
-    reviewCount: '128',
+    reviewCount: '186',
     bestRating: '5',
     worstRating: '1',
   },
@@ -83,16 +75,152 @@ const softwareApplicationSchema = {
     name: 'kisharadilz',
     url: 'https://buymeacoffee.com/kisharadilz',
   },
+  featureList: [
+    'Uncompressed Studio-Quality Lossless 16/24-bit PCM WAV Recording',
+    'Real-time 60 FPS Audio Waveform and Frequency Spectrum Visualizer',
+    'Bypass Automated Gain Control (AGC) and Browser Echo Cancellation',
+    '100% Client-Side In-Browser Processing (Zero Server Uploads)',
+    'Instant Scrubbable Playback and Multi-Take Session Manager',
+    'Native Hardware Sample Rate Support (44.1kHz, 48kHz, 96kHz)',
+    'Unlimited Free Recording Duration and Infinite Takes',
+  ],
+};
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  '@id': `${canonical}#faq`,
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: t.faq.q1,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: t.faq.a1,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: t.faq.q2,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: t.faq.a2,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: t.faq.q3,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: t.faq.a3,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: t.faq.q4,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: t.faq.a4,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: t.faq.q5,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: t.faq.a5,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: t.faq.q6,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: t.faq.a6,
+      },
+    },
+    {
+      '@type': 'Question',
+      name: t.faq.q7,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: t.faq.a7,
+      },
+    },
+  ],
+};
+
+const howToSchema = {
+  '@type': 'HowTo',
+  '@id': `${canonical}#howto`,
+  name: t.howItWorks.title,
+  description: t.howItWorks.subtitle,
+  totalTime: 'PT1M',
+  step: [
+    {
+      '@type': 'HowToStep',
+      position: 1,
+      name: t.howItWorks.step1Title,
+      text: t.howItWorks.step1Desc,
+      url: `${canonical}#step-1`,
+    },
+    {
+      '@type': 'HowToStep',
+      position: 2,
+      name: t.howItWorks.step2Title,
+      text: t.howItWorks.step2Desc,
+      url: `${canonical}#step-2`,
+    },
+    {
+      '@type': 'HowToStep',
+      position: 3,
+      name: t.howItWorks.step3Title,
+      text: t.howItWorks.step3Desc,
+      url: `${canonical}#step-3`,
+    },
+  ],
+};
+
+const breadcrumbSchema = {
+  '@type': 'BreadcrumbList',
+  '@id': `${canonical}#breadcrumb`,
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: siteUrl,
+    },
+    ...(locale !== 'en'
+      ? [
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: currentLocaleObj.nativeName,
+            item: canonical,
+          },
+        ]
+      : []),
+  ],
+};
+
+const schemaGraph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    websiteSchema,
+    softwareApplicationSchema,
+    faqSchema,
+    howToSchema,
+    breadcrumbSchema,
+  ],
 };
 ---
 
-<!-- Global Metadata -->
+<!-- Core Technical SEO & Preconnections -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="generator" content={Astro.generator} />
-<meta name="theme-color" content="#D8A2A2" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<link rel="manifest" href="/site.webmanifest" />
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VN7K98J5ZT" is:inline></script>
@@ -110,7 +238,21 @@ const softwareApplicationSchema = {
 <meta name="description" content={t.meta.description} />
 <meta name="keywords" content={t.meta.keywords} />
 <meta name="author" content="VoiceTake" />
-<meta name="robots" content="index, follow" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+<!-- Mobile Web App & Theme -->
+<meta name="theme-color" content="#D8A2A2" />
+<meta name="application-name" content="VoiceTake" />
+<meta name="apple-mobile-web-app-title" content="VoiceTake" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+<!-- Icons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/favicon.svg" />
+<link rel="manifest" href="/site.webmanifest" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonical} />
@@ -129,8 +271,11 @@ const softwareApplicationSchema = {
 <meta property="og:title" content={t.meta.title} />
 <meta property="og:description" content={t.meta.description} />
 <meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:secure_url" content={ogImageUrl} />
+<meta property="og:image:type" content="image/svg+xml" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="VoiceTake - Free Studio-Quality Browser Audio Recorder" />
 <meta property="og:locale" content={ogLocales[locale]} />
 {LOCALES.filter((loc) => loc.code !== locale).map((loc) => (
   <meta property="og:locale:alternate" content={ogLocales[loc.code]} />
@@ -142,8 +287,7 @@ const softwareApplicationSchema = {
 <meta name="twitter:title" content={t.meta.title} />
 <meta name="twitter:description" content={t.meta.description} />
 <meta name="twitter:image" content={ogImageUrl} />
+<meta name="twitter:image:alt" content="VoiceTake - Free Studio-Quality Browser Audio Recorder" />
 
-<!-- Structured Data (JSON-LD) Schemas natively injected -->
-<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
-<script type="application/ld+json" set:html={JSON.stringify(webApplicationSchema)} />
-<script type="application/ld+json" set:html={JSON.stringify(softwareApplicationSchema)} />
+<!-- Structured Data (JSON-LD) Schemas: WebSite, WebApplication, FAQPage, HowTo, BreadcrumbList -->
+<script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />

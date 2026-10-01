@@ -123,6 +123,16 @@ export interface Translation {
     step3Title: string;
     step3Desc: string;
   };
+  useCases: {
+    title: string;
+    subtitle: string;
+    items: { title: string; desc: string; icon: string }[];
+  };
+  guide: {
+    title: string;
+    subtitle: string;
+    articles: { title: string; content: string }[];
+  };
   faq: {
     title: string;
     subtitle: string;
@@ -136,6 +146,10 @@ export interface Translation {
     a4: string;
     q5: string;
     a5: string;
+    q6: string;
+    a6: string;
+    q7: string;
+    a7: string;
   };
   footer: {
     rights: string;
@@ -148,9 +162,9 @@ export interface Translation {
 export const translations: Record<Locale, Translation> = {
   en: {
     meta: {
-      title: 'VoiceTake | Free Studio-Quality Browser Audio Recorder',
-      description: 'Record, visualize, and download uncompressed studio-quality WAV audio directly in your browser. 100% client-side, zero server uploads, bypasses AGC for pristine sound.',
-      keywords: 'audio recorder, studio audio recorder, browser audio recorder, lossless WAV recorder, high quality voice recorder, client side audio recording, web audio api',
+      title: 'VoiceTake - Free Online Audio Recorder | Lossless Studio WAV',
+      description: 'Free online studio audio recorder. Record, visualize, and download uncompressed 16/24-bit PCM WAV in your browser. 100% private, zero server uploads, AGC bypass.',
+      keywords: 'online audio recorder, free voice recorder, studio audio recorder, browser audio recorder, lossless wav recorder, record audio online, wav recorder, uncompressed audio recording, voice recorder without limits, web audio recorder, microphone recorder, pcm wav recorder, client side audio recording, free voice memo online',
     },
     nav: {
       features: 'Features',
@@ -260,6 +274,64 @@ export const translations: Record<Locale, Translation> = {
       step3Title: '3. Audition & Download WAV',
       step3Desc: 'Instantly playback your take. Click Download Lossless WAV to save your broadcast-ready audio file directly to your disk.',
     },
+    useCases: {
+      title: 'Engineered for Every Audio Workflow',
+      subtitle: 'From quick voice memos to broadcast-ready studio masters, VoiceTake delivers uncompromising fidelity.',
+      items: [
+        {
+          title: 'Voiceover & Auditions',
+          desc: 'Record clean vocal auditions with full dynamic nuances, zero background noise suppression artifacts, and broadcast-ready WAV delivery.',
+          icon: '🎙️',
+        },
+        {
+          title: 'Vocalists & Songwriters',
+          desc: 'Capture acoustic instruments, vocal runs, and spontaneous melodic ideas without aggressive browser compression cutting off natural harmonic overtones.',
+          icon: '🎵',
+        },
+        {
+          title: 'Podcasters & Remote Audio',
+          desc: 'Record remote guest audio locally in lossless WAV to eliminate Zoom and Google Meet robotic compression artifacts before mixing.',
+          icon: '📻',
+        },
+        {
+          title: 'Sound Design & Foley',
+          desc: 'Capture real-world sound effects and acoustic textures directly through your USB audio interface or field microphone at native sample rates.',
+          icon: '⚡',
+        },
+        {
+          title: 'Journalists & Interviews',
+          desc: 'Conduct sensitive interviews with zero recording time limits, infinite takes, and complete confidence that audio never leaves your machine.',
+          icon: '📝',
+        },
+        {
+          title: 'YouTubers & Video Creators',
+          desc: 'Export crisp, uncompressed WAV voice tracks ready to drag and drop straight into Premiere Pro, DaVinci Resolve, or Final Cut Pro.',
+          icon: '🎬',
+        },
+      ],
+    },
+    guide: {
+      title: 'The Engineering Behind VoiceTake',
+      subtitle: 'Discover how modern in-browser Web Audio API architecture surpasses legacy cloud recorders.',
+      articles: [
+        {
+          title: 'Why Uncompressed PCM WAV Outperforms MP3 and Opus',
+          content: 'Compressed audio codecs like MP3 and Opus reduce file sizes by permanently removing high-frequency overtones above 16kHz and smoothing transient attacks. Uncompressed 16-bit linear PCM RIFF WAV preserves every single digital audio sample captured by your audio interface converter. This guarantees maximum headroom, transparent equalization, and pristine quality when mastering in DAWs like Pro Tools, Logic Pro, or Ableton Live.',
+        },
+        {
+          title: 'The Problem with Browser Automated Gain Control (AGC)',
+          content: 'Standard web browsers automatically alter your microphone sensitivity in real-time to normalize voice chat volume. This creates audible background noise "breathing" during silent pauses and squashes the expressive dynamics of musical instruments. VoiceTake\'s Studio Pure mode explicitly instructs the MediaStream API to disable AGC, echo cancellation, and noise suppression, delivering the pure acoustic response of your microphone.',
+        },
+        {
+          title: 'Full Hardware Sample Rate Support (44.1 kHz, 48 kHz, 96 kHz)',
+          content: 'Many online voice recorders downsample audio to 16kHz or 24kHz to reduce server bandwidth costs, resulting in muffled, flat speech. Because VoiceTake executes 100% locally, it captures audio at your interface native clock rate (typically 48kHz for video broadcast or 44.1kHz for CD music production) with zero resampling degradation.',
+        },
+        {
+          title: 'Zero-Knowledge Security: 100% In-Memory Audio Processing',
+          content: 'Traditional online tools upload your audio to third-party cloud servers for conversion. This exposes sensitive meetings, personal voice memos, and proprietary music stems to potential interception and AI model scraping. VoiceTake never sends a single byte of audio over the network; all buffer operations occur exclusively inside your device local RAM.',
+        },
+      ],
+    },
     faq: {
       title: 'Frequently Asked Questions',
       subtitle: 'Everything you need to know about recording high-fidelity audio in the browser.',
@@ -273,6 +345,10 @@ export const translations: Record<Locale, Translation> = {
       a4: 'MP3 and lossy codecs discard subtle acoustic frequencies and introduce phase distortion. Uncompressed WAV preserves 100% of the acoustic data captured by your audio interface or USB microphone without compression artifacts.',
       q5: 'Does VoiceTake work on mobile devices?',
       a5: 'Yes, VoiceTake works smoothly on modern mobile browsers including iOS Safari and Android Chrome with responsive touch-friendly controls.',
+      q6: 'Is there any recording time limit or take limit on VoiceTake?',
+      a6: 'No. VoiceTake has zero artificial time limits and allows you to record unlimited consecutive takes in a single session. Your recording length is only constrained by your device available RAM.',
+      q7: 'Which microphones and audio interfaces are supported?',
+      a7: 'VoiceTake works seamlessly with any microphone recognized by your operating system, including built-in laptop/phone microphones, USB studio condenser mics (Blue Yeti, Rode NT-USB, Shure MV7), and professional XLR audio interfaces (Focusrite Scarlett, PreSonus, Universal Audio, MOTU).',
     },
     footer: {
       rights: 'VoiceTake — Free Studio-Quality Browser Audio Recorder. Open source & client-side.',
@@ -284,9 +360,9 @@ export const translations: Record<Locale, Translation> = {
 
   es: {
     meta: {
-      title: 'VoiceTake | Grabador de Audio de Calidad de Estudio Gratuito',
-      description: 'Graba, visualiza y descarga audio WAV sin comprimir con calidad de estudio directamente en tu navegador. 100% del lado del cliente, sin servidores y sin AGC.',
-      keywords: 'grabador de audio, grabadora de voz online, grabador wav sin pérdidas, audio de estudio en navegador, grabadora sin servidor, web audio api',
+      title: 'VoiceTake - Grabador de Audio Online Gratuito | WAV de Estudio sin Pérdidas',
+      description: 'Grabador de audio de estudio online gratuito. Graba, visualiza y descarga PCM WAV sin comprimir de 16/24 bits en tu navegador. 100% privado, sin servidores.',
+      keywords: 'grabador de audio online, grabador de voz gratuito, grabador wav sin perdidas, grabador de estudio navegador, grabar audio sin limites, pcm wav online',
     },
     nav: {
       features: 'Características',
@@ -396,6 +472,40 @@ export const translations: Record<Locale, Translation> = {
       step3Title: '3. Escucha y Descarga WAV',
       step3Desc: 'Reproduce tu toma de inmediato y pulsa Descargar WAV sin pérdidas para guardarla en tu disco.',
     },
+    useCases: {
+      title: 'Diseñado para Cada Flujo de Trabajo',
+      subtitle: 'Desde notas rápidas hasta pistas maestras de estudio con total fidelidad.',
+      items: [
+        { title: 'Locución y Doblaje', desc: 'Audiciones impecables con dinámica completa y entrega en WAV profesional.', icon: '🎙️' },
+        { title: 'Músicos y Cantantes', desc: 'Graba instrumentos acústicos y voces sin que la compresión del navegador corte los armónicos.', icon: '🎵' },
+        { title: 'Podcasters y Entrevistas', desc: 'Graba a invitados remotos en WAV sin artefactos robóticos de videollamadas.', icon: '📻' },
+        { title: 'Diseño Sonoro y Efectos', desc: 'Captura texturas acústicas reales desde cualquier interfaz USB a frecuencias nativas.', icon: '⚡' },
+        { title: 'Periodistas y Estudiantes', desc: 'Entrevistas y notas con duración ilimitada y privacidad 100% en tu dispositivo.', icon: '📝' },
+        { title: 'Creadores de Video', desc: 'Pistas de audio cristalinas listas para arrastrar a Premiere, DaVinci o Final Cut.', icon: '🎬' },
+      ],
+    },
+    guide: {
+      title: 'La Ingeniería de VoiceTake',
+      subtitle: 'Descubre por qué la arquitectura Web Audio API supera a las grabadoras en la nube tradicionales.',
+      articles: [
+        {
+          title: 'Por qué el WAV PCM sin comprimir supera al MP3 y Opus',
+          content: 'Los formatos comprimidos eliminan armónicos por encima de 16kHz para ahorrar espacio. El formato PCM WAV sin comprimir conserva el 100% de la información analógica digitalizada sin degradación ni pérdida de dinámica.',
+        },
+        {
+          title: 'El problema del AGC (Control Automático de Ganancia)',
+          content: 'Los navegadores ajustan el volumen del micrófono en tiempo real, bombeando ruido en las pausas. El modo Estudio Puro desactiva estos filtros para respetar la acústica original de tu micrófono.',
+        },
+        {
+          title: 'Frecuencias de Muestreo Nativas (44.1kHz, 48kHz, 96kHz)',
+          content: 'Al operar 100% en tu máquina, VoiceTake graba a la frecuencia nativa de tu tarjeta de sonido sin re-muestreo destructivo.',
+        },
+        {
+          title: 'Seguridad Zero-Knowledge: 100% en Memoria Local',
+          content: 'Ningún dato de audio se transmite por internet. Todas las tomas se almacenan y procesan en la memoria RAM de tu navegador, garantizando confidencialidad absoluta.',
+        },
+      ],
+    },
     faq: {
       title: 'Preguntas Frecuentes',
       subtitle: 'Todo lo que necesitas saber sobre la grabación de audio de alta fidelidad en el navegador.',
@@ -409,6 +519,10 @@ export const translations: Record<Locale, Translation> = {
       a4: 'MP3 elimina frecuencias sutiles y genera distorsión de fase. WAV sin comprimir conserva el 100% de la información acústica capturada.',
       q5: '¿Funciona en teléfonos móviles?',
       a5: 'Sí, es totalmente compatible con navegadores móviles como Safari en iOS y Chrome en Android.',
+      q6: '¿Hay límite de tiempo de grabación o número de tomas?',
+      a6: 'No. No hay límites artificiales de tiempo ni de tomas. Puedes grabar tanto como soporte la memoria RAM de tu dispositivo.',
+      q7: '¿Qué micrófonos e interfaces son compatibles?',
+      a7: 'Cualquier micrófono detectado por tu sistema operativo: micros USB (Blue Yeti, Rode, Shure), interfaces XLR (Focusrite, PreSonus) y micros integrados.',
     },
     footer: {
       rights: 'VoiceTake — Grabador de audio de calidad de estudio gratuito para navegador.',
@@ -420,9 +534,9 @@ export const translations: Record<Locale, Translation> = {
 
   pt: {
     meta: {
-      title: 'VoiceTake | Gravador de Áudio com Qualidade de Estúdio Grátis',
-      description: 'Grave, visualize e baixe áudio WAV não compactado com qualidade de estúdio diretamente no navegador. 100% no cliente, sem servidores e sem AGC.',
-      keywords: 'gravador de audio, gravador de voz online, gravador wav sem perdas, gravar audio no navegador, gravador studio, web audio api',
+      title: 'VoiceTake - Gravador de Áudio Online Grátis | WAV de Estúdio sem Perdas',
+      description: 'Gravador de áudio de estúdio online gratuito. Grave, visualize e baixe PCM WAV não compactado de 16/24 bits no navegador. 100% privado, sem servidores.',
+      keywords: 'gravador de audio online, gravador de voz gratis, gravador wav sem perdas, gravar audio no navegador, gravador studio, web audio api',
     },
     nav: {
       features: 'Recursos',
@@ -532,6 +646,40 @@ export const translations: Record<Locale, Translation> = {
       step3Title: '3. Ouça e Baixe em WAV',
       step3Desc: 'Ouça sua gravação instantaneamente e clique em Baixar WAV sem perdas para salvar no seu dispositivo.',
     },
+    useCases: {
+      title: 'Projetado para Todos os Criadores',
+      subtitle: 'De gravações vocais a podcasts profissionais com fidelidade total.',
+      items: [
+        { title: 'Locução e Dublagem', desc: 'Áudio limpo para testes e trabalhos profissionais em WAV sem perda.', icon: '🎙️' },
+        { title: 'Músicos e Cantores', desc: 'Capture voz e instrumentos sem o corte de frequências da compressão web.', icon: '🎵' },
+        { title: 'Podcasts e Entrevistas', desc: 'Grave áudio remoto em WAV eliminando a compressão de chamadas online.', icon: '📻' },
+        { title: 'Efeitos Sonoros e Foley', desc: 'Capture texturas e sons em alta resolução direto da sua interface de áudio.', icon: '⚡' },
+        { title: 'Jornalistas e Estudantes', desc: 'Gravações sem limite de tempo com privacidade total no seu navegador.', icon: '📝' },
+        { title: 'Criadores de Vídeo', desc: 'Arquivos WAV prontos para edição no Premiere Pro, DaVinci ou Final Cut.', icon: '🎬' },
+      ],
+    },
+    guide: {
+      title: 'A Engenharia do VoiceTake',
+      subtitle: 'Por que a tecnologia Web Audio API supera gravadores em nuvem tradicionais.',
+      articles: [
+        {
+          title: 'Por que o WAV PCM sem perdas é superior ao MP3',
+          content: 'Formatos como MP3 descartam frequências sutis para diminuir o arquivo. O WAV linear PCM preserva 100% dos dados acústicos capturados.',
+        },
+        {
+          title: 'Desativando o Controle Automático de Ganho (AGC)',
+          content: 'O AGC dos navegadores comprime a dinâmica e eleva o ruído de fundo. O modo Estúdio Puro desativa esses filtros para manter o som autêntico.',
+        },
+        {
+          title: 'Taxas de Amostragem Nativas (44.1kHz a 96kHz)',
+          content: 'Sem re-amostragem destrutiva, VoiceTake opera na taxa nativa do seu hardware para máxima clareza.',
+        },
+        {
+          title: 'Segurança Total: 100% na Memória do Navegador',
+          content: 'Nenhum dado de áudio é enviado para servidores. Seus arquivos ficam exclusivamente na memória RAM local.',
+        },
+      ],
+    },
     faq: {
       title: 'Perguntas Frequentes',
       subtitle: 'Tudo o que você precisa saber sobre gravação de áudio de alta fidelidade no navegador.',
@@ -545,6 +693,10 @@ export const translations: Record<Locale, Translation> = {
       a4: 'O MP3 descarta frequências para diminuir o tamanho do arquivo. O WAV mantém 100% dos dados originais sem distorção.',
       q5: 'Funciona no celular?',
       a5: 'Sim, funciona tanto no Safari do iPhone quanto no Chrome do Android com interface responsiva.',
+      q6: 'Existe limite de tempo de gravação?',
+      a6: 'Não. O VoiceTake não impõe limites artificiais de duração ou número de tomadas. O único limite é a memória RAM do seu aparelho.',
+      q7: 'Quais microfones são suportados?',
+      a7: 'Qualquer microfone reconhecido pelo seu computador ou celular, incluindo microfones USB, fones de ouvido e interfaces XLR.',
     },
     footer: {
       rights: 'VoiceTake — Gravador de áudio com qualidade de estúdio gratuito para navegador.',
@@ -556,9 +708,9 @@ export const translations: Record<Locale, Translation> = {
 
   de: {
     meta: {
-      title: 'VoiceTake | Kostenloser Studio-Audio-Recorder im Browser',
-      description: 'Nehmen Sie unkomprimiertes Studio-WAV-Audio direkt in Ihrem Browser auf. 100% Client-seitig, keine Server-Uploads, ohne automatische Verstärkungsregelung.',
-      keywords: 'Audio Recorder, Studio Voice Recorder, WAV Recorder ohne Verlust, Browser Audio Recorder, Mikrofon Aufnahme, Web Audio API',
+      title: 'VoiceTake - Kostenloser Online Audio-Recorder | Verlustfreies Studio-WAV',
+      description: 'Kostenloser Studio-Audio-Recorder im Browser. Unkomprimiertes 16/24-Bit PCM-WAV aufnehmen, visualisieren und herunterladen. 100% privat, ohne Server.',
+      keywords: 'Audio Recorder online, kostenloser Voice Recorder, Studio WAV Recorder, Browser Audio Recorder, verlustfreie Aufnahme, Web Audio API',
     },
     nav: {
       features: 'Funktionen',
@@ -668,6 +820,40 @@ export const translations: Record<Locale, Translation> = {
       step3Title: '3. Anhören & WAV herunterladen',
       step3Desc: 'Spielen Sie die Aufnahme direkt ab und speichern Sie die verlustfreie WAV-Datei auf Ihrem Rechner.',
     },
+    useCases: {
+      title: 'Für jeden Audio-Einsatzbereich',
+      subtitle: 'Professionelle Aufnahmen für Musiker, Sprecher, Podcaster und Entwickler.',
+      items: [
+        { title: 'Sprecher & Synchronisation', desc: 'Kristallklare Sprachaufnahmen mit vollem Dynamikumfang ohne Rauschfilter-Artefakte.', icon: '🎙️' },
+        { title: 'Sänger & Musiker', desc: 'Nehmen Sie Akustikgitarre und Gesang auf, ohne dass Kompression Obertöne abschneidet.', icon: '🎵' },
+        { title: 'Podcaster & Interviews', desc: 'Verlustfreie lokale Aufnahme ohne typische Videokonferenz-Klangverluste.', icon: '📻' },
+        { title: 'Sounddesign & Foley', desc: 'Hochwertige Geräusche und Texturen direkt über Ihr USB-Interface aufnehmen.', icon: '⚡' },
+        { title: 'Journalisten & Studenten', desc: 'Unbegrenzte Aufnahmedauer mit garantierter lokaler Datensicherheit.', icon: '📝' },
+        { title: 'Video-Produzenten', desc: 'WAV-Dateien direkt kompatibel mit Premiere, DaVinci Resolve und Final Cut.', icon: '🎬' },
+      ],
+    },
+    guide: {
+      title: 'Die Technik hinter VoiceTake',
+      subtitle: 'Warum in-Browser Web Audio API moderne Cloud-Recorder übertrifft.',
+      articles: [
+        {
+          title: 'Warum unkomprimiertes PCM-WAV MP3 überlegen ist',
+          content: 'MP3 schneidet Frequenzen ab. Unkomprimiertes PCM-WAV speichert 100% aller Audiosamples für beste Studio-Weiterverarbeitung.',
+        },
+        {
+          title: 'Die Nachteile von Browser-AGC',
+          content: 'Automatische Lautstärkeregler pumpen Hintergrundrauschen hoch. Studio Pure umgeht diese Filter vollständig.',
+        },
+        {
+          title: 'Echte Hardware-Abtastraten bis 96 kHz',
+          content: 'VoiceTake nutzt die native Taktfrequenz Ihres Mikrofons ohne klangminderndes Downsampling.',
+        },
+        {
+          title: 'Sicherheit: Reines In-Memory-Processing',
+          content: 'Keine Server-Uploads. Ihre Aufnahmen verbleiben ausschließlich im lokalen RAM Ihres Rechners.',
+        },
+      ],
+    },
     faq: {
       title: 'Häufig gestellte Fragen',
       subtitle: 'Alles Wissenswerte über hochwertige Audioaufnahmen direkt im Webbrowser.',
@@ -681,6 +867,10 @@ export const translations: Record<Locale, Translation> = {
       a4: 'MP3 schneidet Frequenzen ab. Unkomprimiertes WAV erhält 100% aller Klangdetails ohne Qualitätsverlust.',
       q5: 'Funktioniert VoiceTake auf dem Smartphone?',
       a5: 'Ja, sowohl auf Safari unter iOS als auch auf Chrome unter Android.',
+      q6: 'Gibt es ein Zeitlimit bei der Aufnahme?',
+      a6: 'Nein, es gibt keine künstlichen Zeitbegrenzungen. Sie können so lange aufnehmen, wie Ihr Arbeitsspeicher reicht.',
+      q7: 'Welche Mikrofone werden unterstützt?',
+      a7: 'Alle von Ihrem Betriebssystem erkannten Mikrofone, von USB-Mikrofonen bis hin zu professionellen XLR-Audio-Interfaces.',
     },
     footer: {
       rights: 'VoiceTake — Kostenloser Studio-Audio-Recorder im Browser.',
@@ -692,9 +882,9 @@ export const translations: Record<Locale, Translation> = {
 
   fr: {
     meta: {
-      title: 'VoiceTake | Enregistreur Audio Qualité Studio Gratuit sur Navigateur',
-      description: 'Enregistrez, visualisez et téléchargez des fichiers audio WAV non compressés de qualité studio directement dans votre navigateur. 100% côté client, zéro serveur.',
-      keywords: 'enregistreur audio, enregistreur vocal studio, enregistreur wav sans perte, enregistreur audio navigateur, micro studio en ligne, web audio api',
+      title: 'VoiceTake - Enregistreur Audio en Ligne Gratuit | WAV Studio sans Perte',
+      description: 'Enregistreur audio studio gratuit sur navigateur. Enregistrez et téléchargez des fichiers PCM WAV 16/24 bits non compressés. 100% privé, sans serveur.',
+      keywords: 'enregistreur audio en ligne, enregistreur vocal gratuit, enregistreur wav sans perte, enregistrer micro navigateur, audio studio web audio api',
     },
     nav: {
       features: 'Fonctionnalités',
@@ -804,6 +994,40 @@ export const translations: Record<Locale, Translation> = {
       step3Title: '3. Écoutez et Téléchargez en WAV',
       step3Desc: 'Écoutez votre prise immédiatement et cliquez sur Télécharger WAV sans perte pour sauvegarder sur votre disque.',
     },
+    useCases: {
+      title: 'Pour Tous les Métiers du Son',
+      subtitle: 'La fidélité studio accessible pour la voix, la musique et le podcast.',
+      items: [
+        { title: 'Voix-off et Doublage', desc: 'Prises propres et dynamiques livrées en WAV sans artefacts de compression.', icon: '🎙️' },
+        { title: 'Chant et Musique', desc: 'Enregistrez vos instruments acoustiques en préservant toutes les harmoniques naturelles.', icon: '🎵' },
+        { title: 'Podcasts et Émissions', desc: 'Enregistrez vos invités à distance en local sans la dégradation des logiciels de visio.', icon: '📻' },
+        { title: 'Design Sonore et Bruitage', desc: 'Captation d’effets sonores à la fréquence native de votre interface audio.', icon: '⚡' },
+        { title: 'Journalistes et Interviews', desc: 'Enregistrements sans limite de temps et totalement confidentiels sur votre appareil.', icon: '📝' },
+        { title: 'Créateurs Vidéo', desc: 'Fichiers audio WAV prêts à être glissés dans Premiere Pro ou DaVinci Resolve.', icon: '🎬' },
+      ],
+    },
+    guide: {
+      title: 'L’Ingénierie Audio derrière VoiceTake',
+      subtitle: 'Comprenez pourquoi le traitement Web Audio API local surpasse les serveurs distants.',
+      articles: [
+        {
+          title: 'Pourquoi le WAV PCM sans perte est supérieur au MP3',
+          content: 'Le MP3 coupe les hautes fréquences pour réduire le fichier. Le PCM WAV conserve 100% de la dynamique pour un mixage studio parfait.',
+        },
+        {
+          title: 'Le problème du contrôle automatique de gain (AGC)',
+          content: 'L’AGC compresse le signal et augmente le souffle pendant les silences. Studio Pur désactive ce filtre pour un rendu pur.',
+        },
+        {
+          title: 'Fréquences d’Échantillonnage Natives (44.1 à 96 kHz)',
+          content: 'VoiceTake utilise la fréquence native de votre carte son sans aucun sous-échantillonnage destructif.',
+        },
+        {
+          title: 'Confidentialité Totale en Mémoire Vive',
+          content: 'Aucun fichier ne transite par internet. Tout reste exclusivement dans la mémoire vive locale de votre navigateur.',
+        },
+      ],
+    },
     faq: {
       title: 'Questions Fréquentes',
       subtitle: 'Tout ce qu’il faut savoir sur l’enregistrement audio haute fidélité dans le navigateur.',
@@ -817,6 +1041,10 @@ export const translations: Record<Locale, Translation> = {
       a4: 'Le MP3 supprime des fréquences audibles pour réduire la taille. Le WAV conserve 100% de la dynamique originale.',
       q5: 'Est-ce compatible avec les smartphones ?',
       a5: 'Oui, parfaitement compatible avec Safari sur iOS et Chrome sur Android.',
+      q6: 'Y a-t-il une limite de durée d’enregistrement ?',
+      a6: 'Non. Il n’y a aucune limite de durée artificielle. Vous pouvez enregistrer aussi longtemps que la mémoire de votre appareil le permet.',
+      q7: 'Quels microphones sont supportés ?',
+      a7: 'Tous les micros détectés par votre ordinateur ou smartphone : micros USB, casques et cartes son externes XLR.',
     },
     footer: {
       rights: 'VoiceTake — Enregistreur audio qualité studio gratuit pour navigateur.',
@@ -828,9 +1056,9 @@ export const translations: Record<Locale, Translation> = {
 
   ja: {
     meta: {
-      title: 'VoiceTake | 完全無料・スタジオ品質ブラウザ音声レコーダー',
-      description: 'ブラウザ上で非圧縮スタジオ品質のWAV音声を録音・可視化・ダウンロード。100%クライアントサイド動作・サーバー送信なし・AGC自動補正を無効化し純粋な原音を収録。',
-      keywords: '音声レコーダー, ボイスレコーダー オンライン, 高音質 WAV 録音, スタジオ品質 録音, ブラウザ 録音, 完全無料 録音, Web Audio API',
+      title: 'VoiceTake - 完全無料・高音質オンライン音声レコーダー | 非圧縮スタジオWAV',
+      description: 'ブラウザ上で非圧縮スタジオ品質の16/24ビットPCM WAV音声を録音・ダウンロード。完全無料・100%クライアントサイド動作・サーバー送信なし・AGC自動補正を無効化。',
+      keywords: 'オンライン音声レコーダー, ボイスレコーダー 無料, 高音質 wav 録音, ブラウザ 録音, スタジオ録音, 音声録音 制限なし, web audio api',
     },
     nav: {
       features: '特徴',
@@ -940,6 +1168,40 @@ export const translations: Record<Locale, Translation> = {
       step3Title: '3. 即座に試聴＆WAVダウンロード',
       step3Desc: '録音後すぐにプレイヤーで再生確認。「ロスレスWAVを保存」をクリックするだけで最高音質ファイルが保存されます。',
     },
+    useCases: {
+      title: 'あらゆるクリエイティブワークフローに最適',
+      subtitle: 'ナレーション収録から楽器演奏まで、妥協なきスタジオクオリティを提供。',
+      items: [
+        { title: '声優・ナレーションオーディション', desc: '声の細やかなニュアンスをそのまま記録し、DAWへ即座に持ち込めるWAV形式で書き出し。', icon: '🎙️' },
+        { title: 'ボーカル・シンガーソングライター', desc: 'ブラウザ独自の不要な音量圧縮をバイパスし、アコースティック楽器や歌声の倍音を忠実に録音。', icon: '🎵' },
+        { title: 'ポッドキャスト・リモート対談', desc: 'ZoomやMeetのロボット音化を回避し、最高音質WAVで各ホストの音声をローカル収録。', icon: '📻' },
+        { title: '効果音制作・フォーリー録音', desc: '日常の環境音やアコースティック素材を、オーディオインターフェース直結で原音キャプチャ。', icon: '⚡' },
+        { title: '記者取材・学生の講義メモ', desc: '録音時間無制限・外部送信ゼロの完全プライベート環境で安心して長時間の録音が可能。', icon: '📝' },
+        { title: '動画クリエイター・YouTube', desc: 'Premiere ProやDaVinci Resolveにそのままドラッグ＆ドロップできるクリアな音声ファイルを即座に入手。', icon: '🎬' },
+      ],
+    },
+    guide: {
+      title: 'VoiceTakeのオーディオエンジニアリング技術',
+      subtitle: 'Web Audio APIを活用した完全ローカル処理が従来のWebレコーダーを凌駕する理由。',
+      articles: [
+        {
+          title: 'なぜ非圧縮PCM WAVはMP3やOpusより優れているのか',
+          content: 'MP3やOpusなどの非可逆圧縮はファイルサイズを小さくするために16kHz以上の高域やアタック音を間引きます。非圧縮PCM WAVはマイクが捉えた音響信号を1ビットも失わずに記録するため、音の奥行きや透明感を100%保持できます。',
+        },
+        {
+          title: 'ブラウザ標準の自動音量補正（AGC）による音質劣化',
+          content: '多くのWebレコーダーは通話用の自動ゲイン（AGC）が働き、静かな部分で背景ノイズを増幅させてしまいます。「スタジオ・ピュア」モードはAGCを強制無効化し、マイク本来の自然な響きを守ります。',
+        },
+        {
+          title: '最高96kHzサンプリング周波数へのネイティブ対応',
+          content: '通信量を削減するために音声を強制的に間引くクラウド型ツールと異なり、VoiceTakeはあなたのオーディオインターフェースの最高クロック周波数（44.1kHz / 48kHz / 96kHz）でダイレクトに音を記録します。',
+        },
+        {
+          title: 'ゼロナレッジ・完全プライベートなメモリ内処理',
+          content: '録音データが第三者のクラウドサーバーに送信されることは一切ありません。すべての波形処理やWAVファイルの生成は端末のブラウザRAM内だけで完結するため、機密性の高い音声も安心して収録できます。',
+        },
+      ],
+    },
     faq: {
       title: 'よくあるご質問',
       subtitle: 'ブラウザでのスタジオ品質録音についての疑問にお答えします。',
@@ -953,6 +1215,10 @@ export const translations: Record<Locale, Translation> = {
       a4: 'MP3などの非可逆圧縮はファイルサイズを小さくするために高域や微細な音を間引きます。PCM WAVは圧縮を一切行わないため、録音した空気感や倍音を100%残せます。',
       q5: 'スマートフォンでも録音できますか？',
       a5: 'はい、iPhone（Safari）およびAndroid（Chrome）の最新ブラウザで快適にご利用いただけます。',
+      q6: '録音時間やテイク数に上限はありますか？',
+      a6: 'いいえ。VoiceTakeには時間制限やテイク数の制限は一切ありません。端末のメモリ（RAM）が許す限り長時間の連続録音が可能です。',
+      q7: 'どのようなマイクやオーディオインターフェースが使えますか？',
+      a7: 'パソコンやスマートフォンが認識できるすべてのマイク（USBコンデンサーマイク、イヤホンマイク、FocusriteやPreSonusなどのXLRオーディオインターフェース）に対応しています。',
     },
     footer: {
       rights: 'VoiceTake — 完全無料・スタジオ品質ブラウザ音声レコーダー。オープンソース＆クライアントサイド。',
