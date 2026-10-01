@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#121310"/>
+      <stop offset="50%" stop-color="#1A1C18"/>
+      <stop offset="100%" stop-color="#0E0F0D"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle grid pattern -->
+  <g stroke="#8EA66B" stroke-opacity="0.1" stroke-width="1">
+    <line x1="0" y1="105" x2="1200" y2="105"/>
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="525" x2="1200" y2="525"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- Soundwave visualizer graphic in theme colors -->
+  <path d="M 100 480 Q 200 420 300 460 T 500 380 T 700 490 T 900 410 T 1100 460" fill="none" stroke="#8EA66B" stroke-width="4" stroke-opacity="0.6"/>
+  <path d="M 100 480 Q 250 350 400 440 T 600 320 T 800 470 T 1000 360 T 1100 480" fill="none" stroke="#D8A2A2" stroke-width="5" stroke-opacity="0.8"/>
+
+  <!-- Badge: Studio Quality in Warm Cream & Blush -->
+  <rect x="100" y="90" width="220" height="38" rx="19" fill="#FFF9D6" fill-opacity="0.15" stroke="#D8A2A2" stroke-width="1.5"/>
+  <circle cx="122" cy="109" r="6" fill="#D8A2A2"/>
+  <text x="138" y="115" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="14" fill="#FFF9D6" letter-spacing="1">100% LOSSLESS WAV</text>
+
+  <!-- Brand Title -->
+  <text x="100" y="210" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="76" fill="#ffffff" letter-spacing="-1.5">Voice<tspan fill="#D8A2A2">Take</tspan></text>
+
+  <!-- Tagline -->
+  <text x="100" y="280" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="34" fill="#FFDCDC">Free Studio-Quality Browser Audio Recorder</text>
+
+  <!-- Bullet points -->
+  <text x="100" y="360" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="22" fill="#E2E8F0">🎙️  Uncompressed Raw Audio (Bypass AGC &amp; Browser Compression)</text>
+  <text x="100" y="405" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="22" fill="#E2E8F0">⚡  Live 60 FPS Waveform Visualizer &amp; Instant Playback</text>
+  <text x="100" y="450" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="22" fill="#E2E8F0">🔒  100% Client-Side • Zero Server Uploads • Infinite Takes</text>
+
+  <!-- Footer URL -->
+  <text x="100" y="555" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="20" fill="#8EA66B">voicetake.github.io</text>
+</svg>

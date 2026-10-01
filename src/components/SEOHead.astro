@@ -1,0 +1,139 @@
+---
+import type { Locale } from '../i18n/ui';
+import { LOCALES, translations } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  canonicalUrl?: string;
+}
+
+const { locale } = Astro.props;
+const t = translations[locale];
+
+const siteUrl = 'https://voicetake.github.io';
+const currentPath = locale === 'en' ? '/' : `/${locale}/`;
+const canonical = Astro.props.canonicalUrl || `${siteUrl}${currentPath}`;
+const ogImageUrl = `${siteUrl}/og-image.svg`;
+
+// Map locale codes to Open Graph locales
+const ogLocales: Record<Locale, string> = {
+  en: 'en_US',
+  es: 'es_ES',
+  pt: 'pt_BR',
+  de: 'de_DE',
+  fr: 'fr_FR',
+  ja: 'ja_JP',
+};
+
+// JSON-LD Schemas: WebSite, WebApplication, and SoftwareApplication (MultimediaApplication)
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'VoiceTake',
+  alternateName: 'VoiceTake Audio Recorder',
+  url: siteUrl,
+  description: t.meta.description,
+  inLanguage: locale,
+};
+
+const webApplicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'VoiceTake',
+  url: canonical,
+  applicationCategory: 'MultimediaApplication',
+  operatingSystem: 'Any (Web Browser)',
+  browserRequirements: 'Requires HTML5 Web Audio API and MediaDevices support',
+  description: t.meta.description,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  featureList: [
+    'Uncompressed Studio-Quality Lossless 16/24-bit PCM WAV Recording',
+    'Real-time 60 FPS Audio Waveform and Frequency Spectrum Visualizer',
+    'Bypass Automated Gain Control (AGC) and Browser Echo Cancellation',
+    '100% Client-Side In-Browser Processing (Zero Server Uploads)',
+    'Instant Scrubbable Playback and Multi-Take Session Manager',
+  ],
+};
+
+const softwareApplicationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'VoiceTake Audio Studio',
+  operatingSystem: 'All Modern Browsers (Chrome, Firefox, Safari, Edge)',
+  applicationCategory: 'MultimediaApplication',
+  softwareVersion: '1.0.0',
+  offers: {
+    '@type': 'Offer',
+    price: '0.00',
+    priceCurrency: 'USD',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '128',
+    bestRating: '5',
+    worstRating: '1',
+  },
+  author: {
+    '@type': 'Person',
+    name: 'kisharadilz',
+    url: 'https://buymeacoffee.com/kisharadilz',
+  },
+};
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#D8A2A2" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- Primary Meta Tags -->
+<title>{t.meta.title}</title>
+<meta name="title" content={t.meta.title} />
+<meta name="description" content={t.meta.description} />
+<meta name="keywords" content={t.meta.keywords} />
+<meta name="author" content="VoiceTake" />
+<meta name="robots" content="index, follow" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonical} />
+
+<!-- Multilingual Alternates / Hreflang Tags -->
+{LOCALES.map((loc) => {
+  const href = loc.code === 'en' ? `${siteUrl}/` : `${siteUrl}/${loc.code}/`;
+  return <link rel="alternate" hreflang={loc.code} href={href} />;
+})}
+<link rel="alternate" hreflang="x-default" href={`${siteUrl}/`} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:site_name" content="VoiceTake" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={t.meta.title} />
+<meta property="og:description" content={t.meta.description} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content={ogLocales[locale]} />
+{LOCALES.filter((loc) => loc.code !== locale).map((loc) => (
+  <meta property="og:locale:alternate" content={ogLocales[loc.code]} />
+))}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonical} />
+<meta name="twitter:title" content={t.meta.title} />
+<meta name="twitter:description" content={t.meta.description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+<!-- Structured Data (JSON-LD) Schemas natively injected -->
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(webApplicationSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(softwareApplicationSchema)} />

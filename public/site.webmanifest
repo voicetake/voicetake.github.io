@@ -1,0 +1,16 @@
+{
+  "name": "VoiceTake | Free Studio-Quality Audio Recorder",
+  "short_name": "VoiceTake",
+  "description": "Free Studio-Quality Browser Audio Recorder. 100% Client-Side, Zero Server Uploads.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#151614",
+  "theme_color": "#D8A2A2",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

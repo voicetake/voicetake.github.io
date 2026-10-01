@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-vt-rose: #D8A2A2;
+  --color-vt-blush: #FFDCDC;
+  --color-vt-cream: #FFF9D6;
+  --color-vt-sage: #8EA66B;
+  
+  --color-vt-rose-hover: #C98F8F;
+  --color-vt-sage-hover: #7E965B;
+  --color-vt-sage-dark: #586B3E;
+  --color-vt-rose-dark: #A36B6B;
+}
+
+@layer base {
+  :root {
+    --color-rose: #D8A2A2;
+    --color-blush: #FFDCDC;
+    --color-cream: #FFF9D6;
+    --color-sage: #8EA66B;
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}

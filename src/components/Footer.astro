@@ -1,0 +1,117 @@
+---
+import type { Locale } from '../i18n/ui';
+import { LOCALES, translations } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = translations[locale];
+---
+
+<footer class="mt-20 border-t border-vt-rose/20 dark:border-slate-800 bg-[#FFFDF7] dark:bg-[#121311] py-12 transition-colors">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+      <!-- Brand & Mission -->
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-xl font-black text-slate-900 dark:text-white">
+            Voice<span class="text-vt-rose">Take</span>
+          </span>
+          <span class="text-xs px-2 py-0.5 rounded bg-vt-cream/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-vt-rose/20">
+            v1.0
+          </span>
+        </div>
+        <p class="text-sm text-slate-600 dark:text-slate-400 max-w-md leading-relaxed">
+          {t.meta.description}
+        </p>
+        <div class="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-slate-800 dark:text-vt-cream bg-vt-cream/60 dark:bg-slate-900/80 border border-vt-rose/30 px-3 py-1.5 rounded-lg shadow-2xs">
+          <span class="w-2 h-2 rounded-full bg-vt-sage"></span>
+          <span>{t.footer.clientSideGuarantee}</span>
+        </div>
+      </div>
+
+      <!-- Quick Navigation -->
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
+          Navigation
+        </h4>
+        <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+          <li>
+            <a href="#features" class="hover:text-vt-sage dark:hover:text-vt-cream transition-colors">
+              {t.nav.features}
+            </a>
+          </li>
+          <li>
+            <a href="#specs" class="hover:text-vt-sage dark:hover:text-vt-cream transition-colors">
+              {t.nav.specs}
+            </a>
+          </li>
+          <li>
+            <a href="#faq" class="hover:text-vt-sage dark:hover:text-vt-cream transition-colors">
+              {t.nav.faq}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Developer & Community -->
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">
+          Open Project
+        </h4>
+        <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+          <li>
+            <a
+              href="https://buymeacoffee.com/kisharadilz"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 text-vt-sage font-bold hover:underline"
+            >
+              <span>☕</span>
+              <span>{t.footer.supportDev}</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/voicetake/voicetake.github.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-slate-900 dark:hover:text-white transition-colors"
+            >
+              {t.footer.github}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Locales Footer Selector -->
+    <div class="pt-6 border-t border-vt-rose/15 dark:border-slate-800/80 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+      <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+        <span>Languages:</span>
+        {LOCALES.map((l) => {
+          const targetUrl = l.code === 'en' ? '/' : `/${l.code}/`;
+          const isCurrent = l.code === locale;
+          return (
+            <a
+              href={targetUrl}
+              class={`px-2 py-1 rounded transition-colors ${
+                isCurrent
+                  ? 'bg-vt-blush text-slate-900 dark:bg-vt-rose/25 dark:text-vt-blush font-bold border border-vt-rose/30'
+                  : 'hover:text-slate-900 dark:hover:text-white hover:bg-vt-cream/40'
+              }`}
+            >
+              {l.flag} {l.nativeName}
+            </a>
+          );
+        })}
+      </div>
+
+      <div>
+        <p>© {new Date().getFullYear()} VoiceTake. {t.footer.rights}</p>
+      </div>
+    </div>
+  </div>
+</footer>

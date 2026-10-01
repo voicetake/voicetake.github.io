@@ -1,0 +1,350 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AudioRecorder from './AudioRecorder';
+import type { Locale } from '../i18n/ui';
+import { translations } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = translations[locale];
+---
+
+<BaseLayout locale={locale}>
+  <!-- Hero Section -->
+  <section class="relative pt-10 pb-16 sm:pt-16 sm:pb-24 overflow-hidden">
+    <!-- Subtle Palette Background Glows -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[360px] bg-gradient-to-tr from-vt-sage/20 via-vt-rose/20 to-vt-cream/30 blur-3xl pointer-events-none -z-10 rounded-full"></div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-vt-cream/80 dark:bg-[#20221E] text-slate-800 dark:text-slate-200 border border-vt-rose/30 shadow-xs mb-6">
+        <span class="w-2 h-2 rounded-full bg-vt-rose animate-pulse"></span>
+        <span>{t.hero.badge}</span>
+      </div>
+
+      <!-- Main Heading -->
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.15] mb-5">
+        {t.hero.titleStart}{' '}
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-vt-rose via-[#B87B7B] to-vt-sage">
+          {t.hero.titleHighlight}
+        </span>{' '}
+        {t.hero.titleEnd}
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed mb-8">
+        {t.hero.subtitle}
+      </p>
+
+      <!-- The React Island Studio Recorder -->
+      <div class="mt-4">
+        <AudioRecorder client:load t={t.recorder} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Specifications Table Section -->
+  <section id="specs" class="py-16 sm:py-20 bg-white/60 dark:bg-[#1A1C18]/60 border-y border-vt-rose/20 dark:border-slate-800 transition-colors">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-vt-sage dark:text-vt-cream">
+          Studio Architecture
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
+          {t.specs.title}
+        </h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          {t.specs.subtitle}
+        </p>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-vt-rose/25 dark:border-slate-800 shadow-sm bg-white dark:bg-[#1A1C18]">
+        <table class="w-full text-left text-xs sm:text-sm">
+          <thead class="bg-vt-cream/60 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 font-semibold border-b border-vt-rose/20 dark:border-slate-800">
+            <tr>
+              <th scope="col" class="py-3.5 px-4 sm:px-6">{t.specs.colParam}</th>
+              <th scope="col" class="py-3.5 px-4 sm:px-6 text-vt-sage dark:text-vt-cream font-bold">
+                ✓ {t.specs.colVoiceTake}
+              </th>
+              <th scope="col" class="py-3.5 px-4 sm:px-6 text-slate-500 dark:text-slate-400">
+                {t.specs.colStandard}
+              </th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-vt-rose/15 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+            <tr class="hover:bg-vt-cream/20 dark:hover:bg-slate-800/40">
+              <td class="py-4 px-4 sm:px-6 font-semibold">{t.specs.rowFormat}</td>
+              <td class="py-4 px-4 sm:px-6 font-bold text-slate-900 dark:text-white">{t.specs.rowFormatVal}</td>
+              <td class="py-4 px-4 sm:px-6 text-slate-400">{t.specs.rowFormatStd}</td>
+            </tr>
+            <tr class="hover:bg-vt-cream/20 dark:hover:bg-slate-800/40">
+              <td class="py-4 px-4 sm:px-6 font-semibold">{t.specs.rowAudioEngine}</td>
+              <td class="py-4 px-4 sm:px-6 font-bold text-slate-900 dark:text-white">{t.specs.rowAudioEngineVal}</td>
+              <td class="py-4 px-4 sm:px-6 text-slate-400">{t.specs.rowAudioEngineStd}</td>
+            </tr>
+            <tr class="hover:bg-vt-cream/20 dark:hover:bg-slate-800/40">
+              <td class="py-4 px-4 sm:px-6 font-semibold">{t.specs.rowAgc}</td>
+              <td class="py-4 px-4 sm:px-6 font-bold text-slate-900 dark:text-white">{t.specs.rowAgcVal}</td>
+              <td class="py-4 px-4 sm:px-6 text-slate-400">{t.specs.rowAgcStd}</td>
+            </tr>
+            <tr class="hover:bg-vt-cream/20 dark:hover:bg-slate-800/40">
+              <td class="py-4 px-4 sm:px-6 font-semibold">{t.specs.rowPrivacy}</td>
+              <td class="py-4 px-4 sm:px-6 font-bold text-vt-sage">{t.specs.rowPrivacyVal}</td>
+              <td class="py-4 px-4 sm:px-6 text-slate-400">{t.specs.rowPrivacyStd}</td>
+            </tr>
+            <tr class="hover:bg-vt-cream/20 dark:hover:bg-slate-800/40">
+              <td class="py-4 px-4 sm:px-6 font-semibold">{t.specs.rowSampleRate}</td>
+              <td class="py-4 px-4 sm:px-6 font-bold text-slate-900 dark:text-white">{t.specs.rowSampleRateVal}</td>
+              <td class="py-4 px-4 sm:px-6 text-slate-400">{t.specs.rowSampleRateStd}</td>
+            </tr>
+            <tr class="hover:bg-vt-cream/20 dark:hover:bg-slate-800/40">
+              <td class="py-4 px-4 sm:px-6 font-semibold">{t.specs.rowLimit}</td>
+              <td class="py-4 px-4 sm:px-6 font-bold text-slate-900 dark:text-white">{t.specs.rowLimitVal}</td>
+              <td class="py-4 px-4 sm:px-6 text-slate-400">{t.specs.rowLimitStd}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step-by-Step "How It Works" Section -->
+  <section class="py-16 sm:py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-vt-rose font-semibold">
+          Workflow
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
+          {t.howItWorks.title}
+        </h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          {t.howItWorks.subtitle}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="relative bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+          <div class="w-10 h-10 rounded-xl bg-vt-blush text-slate-900 flex items-center justify-center font-black text-lg mb-4 border border-vt-rose/30">
+            1
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">
+            {t.howItWorks.step1Title}
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            {t.howItWorks.step1Desc}
+          </p>
+        </div>
+
+        <div class="relative bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+          <div class="w-10 h-10 rounded-xl bg-vt-cream text-slate-900 flex items-center justify-center font-black text-lg mb-4 border border-vt-rose/30">
+            2
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">
+            {t.howItWorks.step2Title}
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            {t.howItWorks.step2Desc}
+          </p>
+        </div>
+
+        <div class="relative bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+          <div class="w-10 h-10 rounded-xl bg-vt-sage/20 text-vt-sage-dark dark:text-vt-cream flex items-center justify-center font-black text-lg mb-4 border border-vt-sage/40">
+            3
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">
+            {t.howItWorks.step3Title}
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            {t.howItWorks.step3Desc}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid Section -->
+  <section id="features" class="py-16 sm:py-20 bg-vt-cream/25 dark:bg-[#151614] border-t border-vt-rose/20 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs font-bold uppercase tracking-wider text-vt-sage dark:text-vt-cream font-semibold">
+          Engine Capabilities
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
+          {t.features.title}
+        </h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          {t.features.subtitle}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+          <div class="w-11 h-11 rounded-xl bg-vt-blush text-slate-900 flex items-center justify-center mb-4 border border-vt-rose/30">
+            <svg class="w-6 h-6 text-vt-rose" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+            </svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">{t.features.f1Title}</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{t.features.f1Desc}</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+          <div class="w-11 h-11 rounded-xl bg-vt-sage/20 text-vt-sage flex items-center justify-center mb-4 border border-vt-sage/40">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">{t.features.f2Title}</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{t.features.f2Desc}</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+          <div class="w-11 h-11 rounded-xl bg-vt-cream text-slate-900 flex items-center justify-center mb-4 border border-vt-rose/30">
+            <svg class="w-6 h-6 text-vt-rose" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+            </svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">{t.features.f3Title}</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{t.features.f3Desc}</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+          <div class="w-11 h-11 rounded-xl bg-vt-blush text-slate-900 flex items-center justify-center mb-4 border border-vt-rose/30">
+            <svg class="w-6 h-6 text-vt-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">{t.features.f4Title}</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{t.features.f4Desc}</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+          <div class="w-11 h-11 rounded-xl bg-vt-cream text-slate-900 flex items-center justify-center mb-4 border border-vt-rose/30">
+            <svg class="w-6 h-6 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">{t.features.f5Title}</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{t.features.f5Desc}</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+          <div class="w-11 h-11 rounded-xl bg-vt-sage/20 text-vt-sage flex items-center justify-center mb-4 border border-vt-sage/40">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">{t.features.f6Title}</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{t.features.f6Desc}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section with Collapsible Details -->
+  <section id="faq" class="py-16 sm:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 font-semibold">
+          Knowledge Base
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
+          {t.faq.title}
+        </h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+          {t.faq.subtitle}
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        <details class="group bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-5 shadow-xs transition-colors open:ring-1 open:ring-vt-sage/40">
+          <summary class="font-bold text-sm sm:text-base text-slate-900 dark:text-white cursor-pointer list-none flex items-center justify-between gap-4">
+            <span>{t.faq.q1}</span>
+            <span class="text-slate-400 group-open:text-vt-sage group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-vt-rose/15 dark:border-slate-800 pt-3">
+            {t.faq.a1}
+          </p>
+        </details>
+
+        <details class="group bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-5 shadow-xs transition-colors open:ring-1 open:ring-vt-sage/40">
+          <summary class="font-bold text-sm sm:text-base text-slate-900 dark:text-white cursor-pointer list-none flex items-center justify-between gap-4">
+            <span>{t.faq.q2}</span>
+            <span class="text-slate-400 group-open:text-vt-sage group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-vt-rose/15 dark:border-slate-800 pt-3">
+            {t.faq.a2}
+          </p>
+        </details>
+
+        <details class="group bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-5 shadow-xs transition-colors open:ring-1 open:ring-vt-sage/40">
+          <summary class="font-bold text-sm sm:text-base text-slate-900 dark:text-white cursor-pointer list-none flex items-center justify-between gap-4">
+            <span>{t.faq.q3}</span>
+            <span class="text-slate-400 group-open:text-vt-sage group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-vt-rose/15 dark:border-slate-800 pt-3">
+            {t.faq.a3}
+          </p>
+        </details>
+
+        <details class="group bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-5 shadow-xs transition-colors open:ring-1 open:ring-vt-sage/40">
+          <summary class="font-bold text-sm sm:text-base text-slate-900 dark:text-white cursor-pointer list-none flex items-center justify-between gap-4">
+            <span>{t.faq.q4}</span>
+            <span class="text-slate-400 group-open:text-vt-sage group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-vt-rose/15 dark:border-slate-800 pt-3">
+            {t.faq.a4}
+          </p>
+        </details>
+
+        <details class="group bg-white dark:bg-[#1A1C18] border border-vt-rose/25 dark:border-slate-800 rounded-2xl p-5 shadow-xs transition-colors open:ring-1 open:ring-vt-sage/40">
+          <summary class="font-bold text-sm sm:text-base text-slate-900 dark:text-white cursor-pointer list-none flex items-center justify-between gap-4">
+            <span>{t.faq.q5}</span>
+            <span class="text-slate-400 group-open:text-vt-sage group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <p class="mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-vt-rose/15 dark:border-slate-800 pt-3">
+            {t.faq.a5}
+          </p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support Developer CTA Banner -->
+  <section class="py-12 bg-linear-to-b from-transparent to-vt-cream/20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="relative overflow-hidden rounded-3xl bg-linear-to-r from-vt-cream/70 via-vt-blush/30 to-transparent dark:from-[#232520] dark:via-[#1D1E1B] dark:to-[#151614] border border-vt-rose/30 p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-vt-blush text-slate-900 dark:bg-vt-rose/25 dark:text-vt-blush mb-3 border border-vt-rose/20">
+            <span>☕</span> Support Independent Audio Software
+          </span>
+          <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+            Help Keep VoiceTake 100% Free & Open
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 max-w-lg leading-relaxed">
+            VoiceTake was created by kisharadilz to give musicians, podcasters, and creators a zero-compromise, zero-tracking lossless recording tool directly in their browser.
+          </p>
+        </div>
+        <a
+          href="https://buymeacoffee.com/kisharadilz"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="shrink-0 px-6 py-3.5 rounded-2xl bg-vt-sage hover:bg-vt-sage-hover text-white font-black text-sm shadow-lg shadow-vt-sage/25 transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2 cursor-pointer"
+        >
+          <span class="text-base">☕</span>
+          <span>Buy Me A Coffee</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

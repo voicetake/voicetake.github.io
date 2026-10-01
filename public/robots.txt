@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://voicetake.github.io/sitemap-index.xml

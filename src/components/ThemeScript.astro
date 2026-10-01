@@ -1,0 +1,16 @@
+---
+// Zero-flicker inline theme initialization script
+---
+<script is:inline>
+  (function () {
+    const storageKey = 'voicetake_theme';
+    const storedTheme = localStorage.getItem(storageKey);
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  })();
+</script>
