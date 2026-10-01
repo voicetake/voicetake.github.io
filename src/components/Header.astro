@@ -13,9 +13,9 @@ const homeUrl = locale === 'en' ? '/' : `/${locale}/`;
 ---
 
 <header class="sticky top-0 z-50 w-full backdrop-blur-md bg-[#FFFDF7]/85 dark:bg-[#151614]/85 border-b border-vt-rose/20 dark:border-slate-800/80 transition-colors">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
     <!-- Brand Logo -->
-    <a href={homeUrl} class="flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-vt-rose rounded-lg">
+    <a href={homeUrl} class="flex items-center gap-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-vt-rose rounded-lg shrink-0">
       <div class="relative w-9 h-9 rounded-xl bg-slate-900 dark:bg-slate-800 flex items-center justify-center p-1.5 shadow-sm group-hover:scale-105 transition-transform border border-vt-rose/30">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="w-full h-full" fill="none">
           <line x1="8" y1="16" x2="8" y2="16" stroke="#D8A2A2" stroke-width="2.5" stroke-linecap="round"/>
@@ -25,23 +25,23 @@ const homeUrl = locale === 'en' ? '/' : `/${locale}/`;
           <line x1="24" y1="14" x2="24" y2="18" stroke="#FFDCDC" stroke-width="2.5" stroke-linecap="round"/>
         </svg>
       </div>
-      <span class="text-xl font-black tracking-tight text-slate-900 dark:text-white">
+      <span class="text-lg sm:text-xl font-black tracking-tight text-slate-900 dark:text-white">
         Voice<span class="text-vt-rose">Take</span>
       </span>
-      <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-vt-blush/80 text-slate-800 dark:bg-vt-rose/25 dark:text-vt-cream border border-vt-rose/40">
+      <span class="hidden lg:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-vt-blush/80 text-slate-800 dark:bg-vt-rose/25 dark:text-vt-cream border border-vt-rose/40">
         Studio
       </span>
     </a>
 
-    <!-- Navigation Anchor Links (Desktop) -->
-    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
+    <!-- Navigation Anchor Links (Desktop only, keeps mobile & tab clean) -->
+    <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
       <a href="#features" class="hover:text-vt-sage dark:hover:text-vt-cream transition-colors">{t.nav.features}</a>
       <a href="#specs" class="hover:text-vt-sage dark:hover:text-vt-cream transition-colors">{t.nav.specs}</a>
       <a href="#faq" class="hover:text-vt-sage dark:hover:text-vt-cream transition-colors">{t.nav.faq}</a>
     </nav>
 
-    <!-- Actions: Language Select, Theme Switcher, Support CTA -->
-    <div class="flex items-center gap-2 sm:gap-3">
+    <!-- Actions: Icon-only on mobile & tablet, expanding with text on desktop -->
+    <div class="flex items-center gap-1.5 sm:gap-2">
       <!-- Language Dropdown -->
       <div class="relative" id="lang-dropdown-wrapper">
         <button
@@ -49,11 +49,12 @@ const homeUrl = locale === 'en' ? '/' : `/${locale}/`;
           id="lang-dropdown-btn"
           aria-haspopup="true"
           aria-expanded="false"
-          class="flex items-center gap-1.5 px-2.5 py-1.5 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 bg-vt-cream/60 dark:bg-slate-800/80 hover:bg-vt-blush/60 dark:hover:bg-slate-700 rounded-xl border border-vt-rose/20 dark:border-slate-700 transition-colors cursor-pointer"
+          title={`Language: ${currentLocaleObj.nativeName}`}
+          class="w-10 h-10 lg:w-auto lg:h-auto p-0 lg:px-2.5 lg:py-1.5 flex items-center justify-center gap-1.5 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 bg-vt-cream/60 dark:bg-slate-800/80 hover:bg-vt-blush/60 dark:hover:bg-slate-700 rounded-xl border border-vt-rose/20 dark:border-slate-700 transition-colors cursor-pointer"
         >
-          <span class="text-base">{currentLocaleObj.flag}</span>
-          <span class="hidden sm:inline">{currentLocaleObj.nativeName}</span>
-          <svg class="w-3.5 h-3.5 opacity-60 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <span class="text-lg leading-none">{currentLocaleObj.flag}</span>
+          <span class="hidden lg:inline">{currentLocaleObj.nativeName}</span>
+          <svg class="hidden lg:inline-block w-3.5 h-3.5 opacity-60 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
@@ -61,7 +62,7 @@ const homeUrl = locale === 'en' ? '/' : `/${locale}/`;
         <!-- Dropdown Menu -->
         <div
           id="lang-dropdown-menu"
-          class="hidden absolute right-0 mt-2 w-42 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-vt-rose/20 dark:border-slate-700 py-1.5 z-50"
+          class="hidden absolute right-0 mt-2 w-42 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-vt-rose/20 dark:border-slate-700 py-1.5 z-50"
         >
           {LOCALES.map((l) => {
             const targetUrl = l.code === 'en' ? '/' : `/${l.code}/`;
@@ -86,12 +87,13 @@ const homeUrl = locale === 'en' ? '/' : `/${locale}/`;
         </div>
       </div>
 
-      <!-- Light / Dark Theme Switcher Button -->
+      <!-- Light / Dark Theme Switcher Button (Pure icon on all screens) -->
       <button
         type="button"
         id="theme-toggle-btn"
         aria-label="Toggle Light/Dark Theme"
-        class="p-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-vt-cream/60 dark:bg-slate-800/80 hover:bg-vt-blush/60 dark:hover:bg-slate-700 border border-vt-rose/20 dark:border-slate-700 rounded-xl transition-colors cursor-pointer"
+        title="Toggle Light/Dark Theme"
+        class="w-10 h-10 lg:w-auto lg:h-auto p-0 lg:p-2 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white bg-vt-cream/60 dark:bg-slate-800/80 hover:bg-vt-blush/60 dark:hover:bg-slate-700 border border-vt-rose/20 dark:border-slate-700 rounded-xl transition-colors cursor-pointer"
       >
         <!-- Sun Icon (shown in dark mode) -->
         <svg class="w-4 h-4 hidden dark:block text-vt-cream" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -103,17 +105,16 @@ const homeUrl = locale === 'en' ? '/' : `/${locale}/`;
         </svg>
       </button>
 
-      <!-- Support Developer CTA -->
+      <!-- Support Developer CTA (Icon only on mobile/tablet, full label on desktop) -->
       <a
         href="https://buymeacoffee.com/kisharadilz"
         target="_blank"
         rel="noopener noreferrer"
         title={t.nav.supportTitle}
-        class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-vt-sage hover:bg-vt-sage-hover text-white font-bold text-xs sm:text-sm shadow-sm shadow-vt-sage/20 transition-all transform hover:scale-102 cursor-pointer focus:outline-none focus:ring-2 focus:ring-vt-sage"
+        class="w-10 h-10 lg:w-auto lg:h-auto p-0 lg:px-3 lg:py-1.5 flex items-center justify-center rounded-xl bg-vt-sage hover:bg-vt-sage-hover text-white font-bold text-xs sm:text-sm shadow-sm shadow-vt-sage/20 transition-all transform hover:scale-102 cursor-pointer focus:outline-none focus:ring-2 focus:ring-vt-sage"
       >
-        <span class="text-sm">☕</span>
-        <span class="hidden sm:inline">{t.nav.support}</span>
-        <span class="sm:hidden">Coffee</span>
+        <span class="text-base leading-none">☕</span>
+        <span class="hidden lg:inline ml-1.5">{t.nav.support}</span>
       </a>
     </div>
   </div>
